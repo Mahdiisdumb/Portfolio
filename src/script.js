@@ -44,7 +44,7 @@ fetchRepos();
 const footprintLinks = [
     {
         name: "Mahdi Studios",
-        url: "https://sites.google.com/nj.spboe.org/mahdi-studios/home",
+        url: "https://mahdi-studios.vercel.app/",
         img: "./img/Mahdi Studios Logo.png"
     },
     {
