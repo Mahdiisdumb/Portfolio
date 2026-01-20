@@ -2,7 +2,7 @@
 
 This repository contains the source code for my **personal portfolio website**, hosted at:
 
-👉 https://mahdiisdumb.vercel.app/ :contentReference[oaicite:0]{index=0}
+👉 https://mahdiisdumb.vercel.app/
 
 It’s a **self‑hosted portfolio site** that showcases who I am and what I do, including links to my projects, web dev work, and contact info.
 
@@ -14,12 +14,12 @@ This is a **personal portfolio website** built with standard web technologies:
 - **CSS**
 - **JavaScript**
 
-It’s designed to show a snapshot of me and my work online — the place people can visit to see what I build and who I am. :contentReference[oaicite:1]{index=1}
+It’s designed to show a snapshot of me and my work online — the place people can visit to see what I build and who I am. 
 
 ## Live Demo
 
 Check out the live portfolio here:  
-https://mahdiisdumb.vercel.app/ :contentReference[oaicite:2]{index=2}
+https://mahdiisdumb.vercel.app/
 
 ## Features
 
