@@ -54,7 +54,7 @@ const footprintLinks = [
     },
     {
         name: "Project SDSG",
-        url: "https://project-sdsg.vercel.app",
+        url: "https://project-sdsg.up.railway.app",
         img: "./img/SDSG Logo.jpeg"
     },
     {
