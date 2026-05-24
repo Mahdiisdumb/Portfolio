@@ -44,7 +44,7 @@ fetchRepos();
 const footprintLinks = [
     {
         name: "Mahdi Studios",
-        url: "https://mahdi-studios.vercel.app/",
+        url: "https://mahdi-studios.up.railway.app/",
         img: "./img/Mahdi Studios Logo.png"
     },
     {
