@@ -1,50 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mahdiisdumb Locker & Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101018">
+    <meta name="description" content="Mahdiisdumb's personal website and project portfolio.">
+    <title>Mahdiisdumb // Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="section">
-        <div class="section-header">Mahdiisdumb:</div>
-        <div style="text-align:center;">
-            <img src="./img/mahdiisdumb.png" alt="Mahdi" id="Mahdi" />
-        </div>
-        <div class="locker" id="locker">
-
-            <div class="section">
-                <div class="section-header">Footprint:</div>
-                <div id="footprint-links" class="footprint-container"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="site-shell">
+        <header class="topbar">
+            <p>WARNING THIS SITE IS DEROGATORY</p>
+            <a class="wordmark" href="#" data-home aria-label="Mahdiisdumb home">
+                <span class="status-dot"></span>
+                <span>MAHDIISDUMB<span class="accent">.up.railway.app</span></span>
+            </a>
+            <div class="topbar-meta">
+                <span class="topbar-label">PERSONAL ARCHIVE</span>
+                <span class="topbar-separator">/</span>
+                <span id="clock">--:--:--</span>
             </div>
-                <div class="section">
-        <div class="section-header">My Projects:</div>
-        <div id="projects">
-        </div>
-    </div>
-            <div class="section">
-                <div class="section-header">Use:</div>
+        </header>
 
-                <div class="use-icons">
-                    <img src="./img/VS.png" class="footprint" alt="VS">
-                    <img src="./img/usb.png" class="footprint" alt="USB">
-                    <img src="./img/git.png" class="footprint" alt="Git">
-                    <img src="./img/Node.png" class="footprint" alt="Node">
-                    <img src="./img/Unity.png" class="footprint" alt="Unity">
+        <main>
+            <section class="view active" id="home" aria-labelledby="home-title">
+                <div class="hero">
+                    <div class="hero-identity">
+                        <img class="avatar avatar-home" src="assets/images/avatar.gif" alt="Mahdiisdumb avatar">
+                        <div class="hero-copy">
+                            <div class="eyebrow"><span class="prompt-mark">&gt;</span> WELCOME TO MY CORNER OF THE INTERNET</div>
+                            <h1 id="home-title">Mahdiisdumb<span class="accent">.</span></h1>
+                            <p class="hero-description">Developer, hobbyist, and professional button-clicker.</p>
+                        </div>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-user">mahdi@portfolio</span><span class="terminal-colon">:</span><span class="terminal-path">~</span><span class="terminal-dollar">$</span>
+                        <span id="typed-command">explore --portfolio</span><span class="cursor" aria-hidden="true"></span>
+                    </div>
                 </div>
-            </div>
-                            <div class="section">
-                <div class="section-header">Games I Play/Played:</div>
 
-                <div id="Games">
-                    <h1 class="footprint">Alot to list 🥹🌹🔋</h1>
+                <nav class="main-nav" aria-label="Main navigation">
+                    <button class="nav-card" data-view="links">
+                        <span class="nav-index">01</span>
+                        <span class="nav-icon" aria-hidden="true">↗</span>
+                        <span class="nav-name">Links</span>
+                        <span class="nav-description">Find me elsewhere on the internet.</span>
+                    </button>
+                    <button class="nav-card" data-view="projects">
+                        <span class="nav-index">02</span>
+                        <span class="nav-icon" aria-hidden="true">⌘</span>
+                        <span class="nav-name">Projects</span>
+                        <span class="nav-description">Things I've made, broken, and rebuilt.</span>
+                    </button>
+                    <button class="nav-card" data-view="about">
+                        <span class="nav-index">03</span>
+                        <span class="nav-icon" aria-hidden="true">◎</span>
+                        <span class="nav-name">About</span>
+                        <span class="nav-description">A little information about me.</span>
+                    </button>
+                </nav>
 
+                <div class="home-footer">
+                    <span><span class="tiny-dot"></span> SYSTEM READY</span>
+                    <span>NO TRACKING · JUST A WEBSITE</span>
                 </div>
-            </div>
+            </section>
+
+            <section class="view" id="links" aria-labelledby="links-title" hidden>
+                <div class="section-heading">
+                    <button class="back-button" data-back>← BACK</button>
+                    <div class="eyebrow">DIRECTORY / 01</div>
+                    <h2 id="links-title">Links<span class="accent">.</span></h2>
+                    <p class="section-description">Other places where I exist on the internet.</p>
+                </div>
+                <div class="item-list" id="links-list"></div>
+            </section>
+
+            <section class="view" id="projects" aria-labelledby="projects-title" hidden>
+                <div class="section-heading">
+                    <button class="back-button" data-back>← BACK</button>
+                    <div class="eyebrow">DIRECTORY / 02</div>
+                    <h2 id="projects-title">Projects<span class="accent">.</span></h2>
+                    <p class="section-description">Choose a directory to explore.</p>
+                </div>
+                <div class="subnav">
+                    <button class="directory-card" data-view="github">
+                        <span class="directory-symbol">⌘</span>
+                        <span class="directory-title">GitHub</span>
+                        <span class="directory-copy">Browse my public repositories.</span>
+                        <span class="directory-arrow">↗</span>
+                    </button>
+                    <button class="directory-card" data-view="school">
+                        <span class="directory-symbol">▤</span>
+                        <span class="directory-title">School</span>
+                        <span class="directory-copy">School-related projects and pages.</span>
+                        <span class="directory-arrow">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="view" id="github" aria-labelledby="github-title" hidden>
+                <div class="section-heading">
+                    <button class="back-button" data-back>← BACK TO PROJECTS</button>
+                    <div class="eyebrow">PROJECTS / GITHUB</div>
+                    <h2 id="github-title">Repositories<span class="accent">.</span></h2>
+                    <p class="section-description">Public repositories fetched from GitHub.</p>
+                </div>
+                <div class="repo-toolbar">
+                    <span id="repo-status" class="muted-label">CONNECTING TO GITHUB...</span>
+                    <a class="text-link" id="github-profile" href="https://github.com/Mahdiisdumb" target="_blank" rel="noopener noreferrer">VIEW PROFILE ↗</a>
+                </div>
+                <div class="item-list" id="repo-list"></div>
+            </section>
+
+            <section class="view" id="school" aria-labelledby="school-title" hidden>
+                <div class="section-heading">
+                    <button class="back-button" data-back>← BACK TO PROJECTS</button>
+                    <div class="eyebrow">PROJECTS / SCHOOL</div>
+                    <h2 id="school-title">School<span class="accent">.</span></h2>
+                    <p class="section-description">A separate shelf for school-related things.</p>
+                </div>
+
+                <div class="school-toolbar">
+                    <span id="school-path">School</span>
+                    <button class="back-button" id="school-folder-back" type="button" hidden>
+                        ← BACK
+                    </button>
+                </div>
+
+                <div class="item-list" id="school-list"></div>
+            </section>
+
+            <section class="view" id="about" aria-labelledby="about-title" hidden>
+                <div class="section-heading">
+                    <button class="back-button" data-back>← BACK</button>
+                    <div class="eyebrow">PROFILE / 03</div>
+                    <h2>About<span class="accent">.</span></h2>
+                    <p class="section-description">So, who the <span class="accent">FUCK</span> am I?</p>
+                </div>
+                <div class="about-panel">
+                    <div class="about-top">
+                        <img class="avatar avatar-about" src="assets/images/avatar.gif" alt="Mahdiisdumb avatar">
+                        <div>
+                            <div class="about-label">USER_PROFILE.TXT</div>
+                            <p class="about-lead">Hey, I'm <span class="accent">Mahdi</span>.</p>
+                        </div>
+                    </div>
+                    <p>I'm a hobbyist developer who likes making things, experimenting with code, and exploring the technical side of games and music.</p>
+                    <p>This site is (as you can tell) a very obscure corner of the internet. It's where you can find my links, projects, and a bit about me.</p>
+                    <div class="about-divider"></div>
+                    <div class="about-gallery" id="about-gallery" aria-label="About me images"></div>
+                    <div class="about-meta">
+                        <span>STATUS</span><strong><span class="tiny-dot"></span> FUCKING DYING🥀</strong>
+                        <span>INTERESTS</span><strong>CODE / GAMES</strong>
+                        <span>ALIAS</span><strong>MAHDIISDUMB(or MahdiisNotSmart)</strong>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <span>© <span id="year"></span> MAHDIISDUMB</span>
+            <span class="footer-center">MADE WITH <span class="accent">INTENTION</span>, NOT A TEMPLATE</span>
+            <a href="#" data-home>RETURN TO ROOT ↑</a>
+        </footer>
     </div>
-    <audio src="mus/music.mp3" autoplay controls loop></audio>
-    <audio id="punchSound" src="./sfx/punch.mp3" preload="auto"></audio>
-    <script src="script.js"></script>
 </body>
 </html>
