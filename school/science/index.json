@@ -1,12 +1,11 @@
 {
-  "name": "Science",
-  "version": 1,
   "items": [
     {
       "name": "Natural vs Synthetic",
-      "description": "A comparison of natural and synthetic materials.",
+      "description": "Nothing of significance. It's literally in the name.",
       "type": "file",
-      "url": "./school/science/NatVsSynth/index.html"
+      "url": "./NatVsSynth.html",
+      "icon": "science"
     }
   ]
 }
