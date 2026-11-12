@@ -44,12 +44,12 @@ const SCHOOL_ITEMS = [
         name: "Science",
         description: "Science class projects and assignments.",
         type: "directory",
-        path: "school/science/",
+        path: "./school/science/",
         items: [
             {
                  name: "Natural vs Synthetic",
                  description: "nothing of significance its literally in the name",
-                 url: "./school/science/project.html"
+                 url: "./school/science/NatVsSynth.html"
              }
         ]
     }

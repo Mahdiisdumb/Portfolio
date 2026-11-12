@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Vs Synthetic Slides</title>
+    <style>:root {
+    --slideshow-max-width: 900px;
+    --slide-height: 500px;
+    --transition-speed: 0.5s;
+    --accent-color: #2563eb;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh; 
+    background-color: #f8fafc; 
+    padding: 40px;
+}
+
+.slideshow-wrapper { 
+    width: 100%; 
+    max-width: var(--slideshow-max-width); 
+}
+
+.slideshow-container {
+    position: relative; 
+    width: 100%; 
+    height: var(--slide-height);
+    overflow: hidden; 
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); 
+    background-color: #1e293b;
+}
+
+.slides-track {
+    display: flex; 
+    height: 100%; 
+    width: 100%;
+    transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide {
+    min-width: 100%; 
+    height: 100%; 
+    position: relative;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    overflow: hidden; /* Keeps absolutely positioned text elements within the canvas bounds */
+}
+
+/* 
+ * Hybrid Absolute Content Positioning Box
+ * Handled dynamically by data-position in JavaScript 
+ */
+.slide-content { 
+    padding: 40px; 
+    max-width: 550px; 
+    width: max-content; /* Prevents long titles from artificially stretching across the whole slide width */
+    z-index: 2; 
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-title { 
+    font-size: 2.25rem; 
+    font-weight: 800; 
+    margin-bottom: 10px; 
+    line-height: 1.2;
+}
+
+.slide-description { 
+    font-size: 1.1rem; 
+    opacity: 0.9; 
+    line-height: 1.5; 
+}
+
+/* 
+ * Dim overlay utility for text contrast over raw images.
+ * Only applies if the slide has a valid style attribute starting with an image URL.
+ */
+.slide[style*="background-image"]::before {
+    content: ''; 
+    position: absolute; 
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25); 
+    z-index: 1; 
+    pointer-events: none;
+}
+
+/* --- UI DESKTOP NAVIGATION --- */
+.nav-btn {
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px); 
+    color: white; 
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    transition: all 0.2s; 
+    opacity: 0; 
+    z-index: 10;
+}
+
+.slideshow-container:hover .nav-btn { 
+    opacity: 1; 
+}
+
+.nav-btn:hover { 
+    background-color: rgba(0, 0, 0, 0.7); 
+    transform: translateY(-50%) scale(1.05); 
+}
+
+.prev-btn { left: 20px; } 
+.next-btn { right: 20px; }
+
+.nav-btn svg { 
+    width: 24px; 
+    height: 24px; 
+    fill: none; 
+    stroke: currentColor; 
+    stroke-width: 2.5; 
+}
+
+/* --- PAGINATION --- */
+.pagination-container { 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 20px; 
+}
+
+.dot {
+    cursor: pointer; 
+    height: 10px; 
+    width: 10px; 
+    background-color: #cbd5e1;
+    border-radius: 50%; 
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.dot.active { 
+    width: 28px; 
+    border-radius: 5px; 
+    background-color: var(--accent-color); 
+}
+</style>
+</head>
+<body>
+    <div class="slideshow-wrapper">
+        <div class="slideshow-container" id="slideshowContainer">
+            <div class="slides-track" id="slidesTrack">
+            
+                <div class="slide" data-bg="#1e293b" data-position="0,0" data-text-color="#ffffff">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Neoprene Vs Polyisoprene</h2>
+                    </div>
+                </div>
+                <div class="slide" data-bg="#716ffe"  data-text-color="black">
+                    <div class="slide-content">
+                        <h2 class="slide-title" data-position="0,200">What we're covering.</h2>
+                        <p class="slide-description" data-position="-00,100">⬤Neoprene and Polyisoprene Characteristics and Uses (strength, durability, water resistance, and common uses)</p>
+                        <p class="slide-description" data-position="-00,20">⬤how Neoprene is made and with what natural resources,</p>
+                        <p class="slide-description" data-position="-00,-60">⬤And the impact on society Neoprene and Polyisoprene has and which is better including justification on why</p>
+                    </div>
+                </div>
+                <div class="slide" data-bg="linear-gradient(135deg, #fef08a, #f97316)" data-position="0,0" data-text-color="#1e293b">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Characteristics And Uses</h2>
+                    </div>
+                </div>
+                    <div class="slide" data-bg="salmon" data-position="0,0" data-text-color="#1e293b">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Neoprene</h2>
+                    </div>
+                </div>
+                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                    <div class="slide-content">
+                        <h2 class="slide-title" data-position="-250,150">Characteristics of Neoprene</h2>
+                    </div>
+                </div>
+                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                    <div class="slide-content">
+                        <h2 class="slide-title" data-position="-250,150">Uses of Neoprene</h2>
+                    </div>
+                </div>
+                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                    <div class="slide-content">
+                        <h2 class="slide-title" data-position="-250,150">What Its composed by</h2>
+                    </div>
+                </div>
+                  <div class="slide" data-bg="#FFF9D0" data-position="0,0" data-text-color="black">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Polyisoprene</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <button class="nav-btn prev-btn" id="prevBtn" aria-label="Previous">
+                <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button class="nav-btn next-btn" id="nextBtn" aria-label="Next">
+                <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+        
+        <!-- Pagination System Elements -->
+        <div class="pagination-container" id="paginationContainer"></div>
+    </div>
+    <script>const AUTOPLAY_INTERVAL = 2147483647; // ms v x 10^3 = s
+const track = document.getElementById('slidesTrack');
+const container = document.getElementById('slideshowContainer');
+const pagination = document.getElementById('paginationContainer');
+const slides = track.querySelectorAll('.slide');
+let currentIndex = 0, autoplayTimer = null;
+
+function updateSlide() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    pagination.querySelectorAll('.dot').forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
+}
+
+function move(dir) {
+    currentIndex = (currentIndex + dir + slides.length) % slides.length;
+    updateSlide();
+    resetAutoplay();
+}
+
+function start() {
+    if (!autoplayTimer && slides.length > 1) {
+        autoplayTimer = setInterval(() => move(1), AUTOPLAY_INTERVAL);
+    }
+}
+
+function stop() {
+    if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    }
+}
+
+function resetAutoplay() {
+    stop();
+    start();
+}
+
+// Fallback keywords for legacy API
+const KEYWORD_POSITION_MAP = {
+    'top-left':      { left: '0%',    top: '0%',    translate: '0%, 0%' },
+    'top-center':    { left: '50%',   top: '0%',    translate: '-50%, 0%' },
+    'top-right':     { left: '100%',  top: '0%',    translate: '-100%, 0%' },
+    'center-left':   { left: '0%',    top: '50%',   translate: '0%, -50%' },
+    'center':        { left: '50%',   top: '50%',   translate: '-50%, -50%' },
+    'center-right':  { left: '100%',  top: '50%',   translate: '-100%, -50%' },
+    'bottom-left':   { left: '0%',    top: '100%',  translate: '0%, -100%' },
+    'bottom-center': { left: '50%',   top: '100%',  translate: '-50%, -100%' },
+    'bottom-right':  { left: '100%',  top: '100%',  translate: '-100%, -100%' }
+};
+
+function applyElementStyles(element) {
+    const bg = element.getAttribute('data-bg') || '';
+    if (bg) {
+        if (bg.startsWith('http') || bg.includes('/') || bg.includes('.')) {
+            element.style.backgroundImage = `url('${bg}')`;
+        } else {
+            element.style.background = bg;
+        }
+    }
+
+    const textColor = element.getAttribute('data-text-color');
+    if (textColor) element.style.color = textColor;
+
+    const size = element.getAttribute('data-size');
+    if (size) element.style.fontSize = size.match(/^\d+$/) ? `${size}px` : size;
+}
+
+function applyPositioning(element, positionAttr) {
+    if (!positionAttr) return;
+    
+    element.style.position = 'absolute';
+    
+    if (positionAttr.includes(',')) {
+        const [xSegment, ySegment] = positionAttr.split(',');
+        const xRaw = xSegment.trim();
+        const yRaw = ySegment.trim();
+
+        const leftValue = xRaw.match(/[a-zA-Z%]/) ? xRaw : `calc(50% + ${xRaw}px)`;
+        const topValue = yRaw.match(/[a-zA-Z%]/) ? yRaw : `calc(50% - ${yRaw}px)`; 
+
+        element.style.left = leftValue;
+        element.style.top = topValue;
+        element.style.transform = 'translate(-50%, -50%)'; 
+    } 
+    else if (KEYWORD_POSITION_MAP[positionAttr]) {
+        const config = KEYWORD_POSITION_MAP[positionAttr];
+        element.style.left = config.left;
+        element.style.top = config.top;
+        element.style.transform = `translate(${config.translate})`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (slides.length === 0) return;
+
+    slides.forEach((slide, i) => {
+        applyElementStyles(slide);
+
+        const slideContentWrapper = slide.querySelector('.slide-content');
+        const slidePosition = slide.getAttribute('data-position');
+        
+        // Fix: Explicitly remove padding limits if custom container positioning is targeted
+        if (slideContentWrapper) {
+            slideContentWrapper.style.position = 'absolute';
+            if (slidePosition) {
+                slideContentWrapper.style.width = 'max-content';
+                slideContentWrapper.style.maxWidth = '600px';
+                applyPositioning(slideContentWrapper, slidePosition);
+            } else {
+                // If the slide frame has no positioning, treat the canvas area as a full stage container
+                slideContentWrapper.style.inset = '0';
+                slideContentWrapper.style.width = '100%';
+                slideContentWrapper.style.maxWidth = '100%';
+            }
+        }
+
+        // Deep child elements selector loop
+        const styledChildren = slide.querySelectorAll('.slide-content, [data-position], [data-bg], [data-text-color], [data-size]');
+        styledChildren.forEach(child => {
+            applyElementStyles(child);
+            // Apply positioning modifications safely only to explicit sub-items
+            if (child !== slide && child !== slideContentWrapper) {
+                applyPositioning(child, child.getAttribute('data-position'));
+            }
+        });
+
+        const dot = document.createElement('span');
+        dot.className = `dot${i === 0 ? ' active' : ''}`;
+        dot.onclick = () => {
+            currentIndex = i;
+            updateSlide();
+            resetAutoplay();
+        };
+        pagination.appendChild(dot);
+    });
+
+    document.getElementById('prevBtn').onclick = () => move(-1);
+    document.getElementById('nextBtn').onclick = () => move(1);
+    window.onkeydown = (e) => {
+        if (e.key === "ArrowLeft") move(-1);
+        if (e.key === "ArrowRight") move(1);
+    };
+    container.onmouseenter = stop;
+    container.onmouseleave = start;
+    start();
+});
+</script>
+</body>
+</html>
