@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "name": "Science",
+      "description": "Science projects and assignments.",
+      "type": "directory",
+      "manifest": "./science/index.json"
+    },
+    {
+      "name": "Mathematics",
+      "description": "Math assignments and exercises.",
+      "type": "directory",
+      "manifest": "./mathematics/index.json"
+    },
+    {
+      "name": "English",
+      "description": "Writing, literature, and language.",
+      "type": "directory",
+      "manifest": "./english/index.json"
+    },
+    {
+      "name": "History",
+      "description": "Historical research and assignments.",
+      "type": "directory",
+      "manifest": "./history/index.json"
+    },
+    {
+      "name": "Art",
+      "description": "Artwork and creative projects.",
+      "type": "directory",
+      "manifest": "./art/index.json"
+    },
+    {
+      "name": "Report Cards",
+      "description": "Academic report cards.",
+      "type": "directory",
+      "manifest": "./report-cards/index.json"
+    },
+    {
+      "name": "Reports",
+      "description": "Written reports and research.",
+      "type": "directory",
+      "manifest": "./reports/index.json"
+    },
+    {
+      "name": "Presentations",
+      "description": "Slideshows and presentations.",
+      "type": "directory",
+      "manifest": "./presentations/index.json"
+    },
+    {
+      "name": "Laboratories",
+      "description": "Lab work and experiments.",
+      "type": "directory",
+      "manifest": "./laboratories/index.json"
+    },
+    {
+      "name": "Worksheets",
+      "description": "Worksheets and practice material.",
+      "type": "directory",
+      "manifest": "./worksheets/index.json"
+    },
+    {
+      "name": "Study Notes",
+      "description": "Notes and revision material.",
+      "type": "directory",
+      "manifest": "./study-notes/index.json"
+    }
+  ]
+}

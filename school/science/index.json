@@ -1,0 +1,12 @@
+{
+  "name": "Science",
+  "version": 1,
+  "items": [
+    {
+      "name": "Natural vs Synthetic",
+      "description": "A comparison of natural and synthetic materials.",
+      "type": "file",
+      "url": "./school/science/NatVsSynth/index.html"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+
 const GITHUB_USERNAME = "Mahdiisdumb";
 
 const LINKS = [
@@ -39,21 +40,7 @@ const ABOUT_IMAGES = [
     "assets/images/about-3.svg"
 ];
 
-const SCHOOL_ITEMS = [
-    {
-        name: "Science",
-        description: "Science class projects and assignments.",
-        type: "directory",
-        path: "./school/science/",
-        items: [
-            {
-                 name: "Natural vs Synthetic",
-                 description: "nothing of significance its literally in the name",
-                 url: "./school/science/NatVsSynth.html"
-             }
-        ]
-    }
-];
+const SCHOOL_MANIFEST = "./school/index.json";
 
 const views = [...document.querySelectorAll(".view")];
 const historyStack = ["home"];
@@ -219,16 +206,36 @@ async function pathExists(path) {
     }
 }
 
+/* SCHOOL DIRECTORY */
+
 let schoolDirectoryStack = [
     {
         name: "School",
-        items: SCHOOL_ITEMS
+        manifest: new URL(SCHOOL_MANIFEST, document.baseURI).href
     }
 ];
 
 let schoolRenderToken = 0;
 
-function createDirectoryCard(directory) {
+async function loadSchoolManifest(path) {
+    const response = await fetch(path, {
+        cache: "no-store"
+    });
+
+    if (!response.ok) {
+        throw new Error(`Manifest returned HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data.items)) {
+        throw new Error("Invalid school manifest: items must be an array.");
+    }
+
+    return data;
+}
+
+function createDirectoryCard(directory, parentManifest) {
     const button = document.createElement("button");
 
     button.type = "button";
@@ -241,7 +248,13 @@ function createDirectoryCard(directory) {
 
     icon.className = "platform-icon";
     icon.alt = "";
-    icon.src = "assets/icons/folder.svg";
+
+    icon.src = directory.icon
+        ? directory.icon.includes("/")
+            ? directory.icon
+            : `assets/icons/${directory.icon}.svg`
+        : "assets/icons/folder.svg";
+
     icon.onerror = () => icon.remove();
 
     leading.appendChild(icon);
@@ -251,7 +264,7 @@ function createDirectoryCard(directory) {
 
     const title = document.createElement("span");
     title.className = "item-title";
-    title.textContent = directory.name;
+    title.textContent = directory.name || "Untitled directory";
 
     const description = document.createElement("span");
     description.className = "item-description";
@@ -267,9 +280,11 @@ function createDirectoryCard(directory) {
     button.append(leading, arrow);
 
     button.addEventListener("click", () => {
+        if (!directory.manifest) return;
+
         schoolDirectoryStack.push({
             name: directory.name,
-            items: directory.items || []
+            manifest: new URL(directory.manifest, parentManifest).href
         });
 
         renderSchoolDirectory();
@@ -290,12 +305,11 @@ function createUnavailableCard(item) {
 
     const title = document.createElement("span");
     title.className = "item-title";
-    title.textContent = item.name;
+    title.textContent = item.name || "Unknown item";
 
     const description = document.createElement("span");
     description.className = "item-description";
-    description.textContent =
-        "Unavailable: this file or page could not be found.";
+    description.textContent = "Unavailable: this file could not be found.";
 
     main.append(title, description);
     leading.appendChild(main);
@@ -309,18 +323,34 @@ function createUnavailableCard(item) {
     return card;
 }
 
+function createSchoolFile(item, parentManifest) {
+    const url = new URL(item.url, parentManifest).href;
+
+    const link = createItem({
+        name: item.name,
+        description: item.description,
+        url,
+        icon: item.icon
+    });
+
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    return link;
+}
+
 async function renderSchoolDirectory() {
     const token = ++schoolRenderToken;
 
     const container = document.getElementById("school-list");
-    const current = schoolDirectoryStack[
-        schoolDirectoryStack.length - 1
-    ];
-
     const pathLabel = document.getElementById("school-path");
     const backButton = document.getElementById("school-folder-back");
 
     if (!container || !pathLabel || !backButton) return;
+
+    const current = schoolDirectoryStack[
+        schoolDirectoryStack.length - 1
+    ];
 
     pathLabel.textContent = schoolDirectoryStack
         .map(folder => folder.name)
@@ -330,87 +360,105 @@ async function renderSchoolDirectory() {
 
     container.replaceChildren();
 
-    if (!current.items.length) {
-        const empty = document.createElement("div");
+    const loading = document.createElement("div");
+    loading.className = "empty-state";
+    loading.textContent = "LOADING SCHOOL DIRECTORY...";
 
-        empty.className = "empty-state";
-        empty.textContent =
-            "This directory is empty. Add links or subdirectories to its items array in script.js.";
+    container.appendChild(loading);
 
-        container.appendChild(empty);
-        return;
-    }
+    try {
+        const manifest = await loadSchoolManifest(current.manifest);
 
-    const pending = document.createElement("div");
+        if (token !== schoolRenderToken) return;
 
-    pending.className = "empty-state";
-    pending.textContent = "CHECKING SCHOOL FILES...";
+        const results = await Promise.all(
+            manifest.items.map(async item => {
+                if (item.type === "directory") {
+                    return {
+                        item,
+                        exists: Boolean(item.manifest)
+                    };
+                }
 
-    container.appendChild(pending);
+                if (!item.url) {
+                    return {
+                        item,
+                        exists: false
+                    };
+                }
 
-    const results = await Promise.all(
-        current.items.map(async item => {
-            if (item.type === "directory") {
-                const folderPath = item.path
-                    ? `${item.path.replace(/\/?$/, "/")}index.html`
-                    : null;
+                let target;
 
-                const folderExists = folderPath
-                    ? await pathExists(folderPath)
-                    : Boolean(item.items);
+                try {
+                    target = new URL(item.url, current.manifest);
+                } catch {
+                    return {
+                        item,
+                        exists: false
+                    };
+                }
+
+                if (
+                    item.type === "external" ||
+                    target.origin !== window.location.origin
+                ) {
+                    return {
+                        item,
+                        exists: true
+                    };
+                }
 
                 return {
                     item,
-                    exists: folderExists
+                    exists: await pathExists(target.href)
                 };
-            }
+            })
+        );
 
-            if (!item.url) {
-                return {
-                    item,
-                    exists: false
-                };
-            }
+        if (token !== schoolRenderToken) return;
 
-            let target;
+        container.replaceChildren();
 
-            try {
-                target = new URL(item.url, window.location.href);
-            } catch {
-                return {
-                    item,
-                    exists: false
-                };
-            }
+        if (results.length === 0) {
+            const empty = document.createElement("div");
 
-            if (target.origin !== window.location.origin) {
-                return {
-                    item,
-                    exists: true,
-                    unchecked: true
-                };
-            }
+            empty.className = "empty-state";
+            empty.textContent = manifest.emptyMessage ||
+                "This directory is currently empty.";
 
-            return {
-                item,
-                exists: await pathExists(item.url)
-            };
-        })
-    );
-
-    if (token !== schoolRenderToken) return;
-
-    container.replaceChildren();
-
-    results.forEach(({ item, exists }) => {
-        if (!exists) {
-            container.appendChild(createUnavailableCard(item));
-        } else if (item.type === "directory") {
-            container.appendChild(createDirectoryCard(item));
-        } else {
-            container.appendChild(createItem(item));
+            container.appendChild(empty);
+            return;
         }
-    });
+
+        results.forEach(({ item, exists }) => {
+            if (!exists) {
+                container.appendChild(createUnavailableCard(item));
+            } else if (item.type === "directory") {
+                container.appendChild(
+                    createDirectoryCard(item, current.manifest)
+                );
+            } else {
+                container.appendChild(
+                    createSchoolFile(item, current.manifest)
+                );
+            }
+        });
+
+    } catch (error) {
+        if (token !== schoolRenderToken) return;
+
+        container.replaceChildren();
+
+        const failure = document.createElement("div");
+
+        failure.className = "empty-state";
+        failure.textContent =
+            `COULD NOT LOAD DIRECTORY: ${error.message}`;
+
+        container.appendChild(failure);
+
+        console.error("School directory error:", error);
+    }
 }
 
 function goBackSchoolFolder() {
@@ -422,6 +470,8 @@ function goBackSchoolFolder() {
 
 document.getElementById("school-folder-back")
     ?.addEventListener("click", goBackSchoolFolder);
+
+/* INITIALIZATION */
 
 renderConfiguredList(
     "links-list",
@@ -444,6 +494,8 @@ if (aboutGallery) {
         aboutGallery.appendChild(image);
     });
 }
+
+/* GITHUB REPOSITORIES */
 
 let repositoriesLoaded = false;
 let loadingRepositories = false;
@@ -524,6 +576,8 @@ async function loadRepositories() {
             "Check your connection or open the GitHub profile directly.";
 
         list.appendChild(message);
+
+        console.error("GitHub repository error:", error);
     } finally {
         loadingRepositories = false;
     }
@@ -535,11 +589,15 @@ if (githubProfile) {
     githubProfile.href = `https://github.com/${GITHUB_USERNAME}`;
 }
 
+/* FOOTER */
+
 const yearElement = document.getElementById("year");
 
 if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
 }
+
+/* CLOCK */
 
 function updateClock() {
     const clock = document.getElementById("clock");
