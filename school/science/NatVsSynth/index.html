@@ -1,375 +1,828 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natural Vs Synthetic Slides</title>
-    <style>:root {
-    --slideshow-max-width: 900px;
-    --slide-height: 500px;
-    --transition-speed: 0.5s;
-    --accent-color: #2563eb;
-}
-
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-}
-
-body {
-    font-family: system-ui, -apple-system, sans-serif;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    min-height: 100vh; 
-    background-color: #f8fafc; 
-    padding: 40px;
-}
-
-.slideshow-wrapper { 
-    width: 100%; 
-    max-width: var(--slideshow-max-width); 
-}
-
-.slideshow-container {
-    position: relative; 
-    width: 100%; 
-    height: var(--slide-height);
-    overflow: hidden; 
-    border-radius: 12px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); 
-    background-color: #1e293b;
-}
-
-.slides-track {
-    display: flex; 
-    height: 100%; 
-    width: 100%;
-    transition: transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.slide {
-    min-width: 100%; 
-    height: 100%; 
-    position: relative;
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    overflow: hidden; /* Keeps absolutely positioned text elements within the canvas bounds */
-}
-
-/* 
- * Hybrid Absolute Content Positioning Box
- * Handled dynamically by data-position in JavaScript 
- */
-.slide-content { 
-    padding: 40px; 
-    max-width: 550px; 
-    width: max-content; /* Prevents long titles from artificially stretching across the whole slide width */
-    z-index: 2; 
-    display: flex;
-    flex-direction: column;
-}
-
-.slide-title { 
-    font-size: 2.25rem; 
-    font-weight: 800; 
-    margin-bottom: 10px; 
-    line-height: 1.2;
-}
-
-.slide-description { 
-    font-size: 1.1rem; 
-    opacity: 0.9; 
-    line-height: 1.5; 
-}
-
-/* 
- * Dim overlay utility for text contrast over raw images.
- * Only applies if the slide has a valid style attribute starting with an image URL.
- */
-.slide[style*="background-image"]::before {
-    content: ''; 
-    position: absolute; 
-    inset: 0;
-    background: rgba(0, 0, 0, 0.25); 
-    z-index: 1; 
-    pointer-events: none;
-}
-
-/* --- UI DESKTOP NAVIGATION --- */
-.nav-btn {
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.3); 
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(4px); 
-    color: white; 
-    width: 50px; 
-    height: 50px;
-    border-radius: 50%; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
-    transition: all 0.2s; 
-    opacity: 0; 
-    z-index: 10;
-}
-
-.slideshow-container:hover .nav-btn { 
-    opacity: 1; 
-}
-
-.nav-btn:hover { 
-    background-color: rgba(0, 0, 0, 0.7); 
-    transform: translateY(-50%) scale(1.05); 
-}
-
-.prev-btn { left: 20px; } 
-.next-btn { right: 20px; }
-
-.nav-btn svg { 
-    width: 24px; 
-    height: 24px; 
-    fill: none; 
-    stroke: currentColor; 
-    stroke-width: 2.5; 
-}
-
-/* --- PAGINATION --- */
-.pagination-container { 
-    display: flex; 
-    justify-content: center; 
-    gap: 10px; 
-    margin-top: 20px; 
-}
-
-.dot {
-    cursor: pointer; 
-    height: 10px; 
-    width: 10px; 
-    background-color: #cbd5e1;
-    border-radius: 50%; 
-    transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-.dot.active { 
-    width: 28px; 
-    border-radius: 5px; 
-    background-color: var(--accent-color); 
-}
-</style>
+    <meta name="theme-color" content="#f1f2f8">
+    <meta name="description" content="A comparison of natural rubber and synthetic neoprene, including their properties, production, uses, and environmental impact.">
+    <title>Natural vs Synthetic | Neoprene vs Natural Rubber</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
+
 <body>
-    <div class="slideshow-wrapper">
-        <div class="slideshow-container" id="slideshowContainer">
+    <main class="slideshow-wrapper">
+        <div class="slideshow-container"
+             id="slideshowContainer"
+             aria-label="Natural rubber versus neoprene presentation">
             <div class="slides-track" id="slidesTrack">
-            
-                <div class="slide" data-bg="#1e293b" data-position="0,0" data-text-color="#ffffff">
+
+                <!-- SLIDE 1: TITLE -->
+                <section class="slide" data-bg="#1e293b" data-text-color="#ffffff">
                     <div class="slide-content">
-                        <h2 class="slide-title">Neoprene Vs Polyisoprene</h2>
+                        <p class="eyebrow">Material Science Presentation</p>
+
+                        <h1 class="slide-title">
+                            Neoprene vs. Natural Rubber
+                        </h1>
+
+                        <p class="slide-description">
+                            Two types of rubber, two very different ways of making
+                            useful materials. Let's see how they compare.
+                        </p>
+
+                        <div class="image-placeholder title-images">
+                            <img src="./img/nat.jpg" alt="Natural rubber">
+                            <img src="./img/synth.jpg" alt="Synthetic neoprene">
+                        </div>
+
+                        <p class="small-note">By Mahdi</p>
                     </div>
-                </div>
-                <div class="slide" data-bg="#716ffe"  data-text-color="black">
+                </section>
+
+                <!-- SLIDE 2: INTRODUCTION -->
+                <section class="slide" data-bg="#716fee" data-text-color="#ffffff">
                     <div class="slide-content">
-                        <h2 class="slide-title" data-position="0,200">What we're covering.</h2>
-                        <p class="slide-description" data-position="-00,100">⬤Neoprene and Polyisoprene Characteristics and Uses (strength, durability, water resistance, and common uses)</p>
-                        <p class="slide-description" data-position="-00,20">⬤how Neoprene is made and with what natural resources,</p>
-                        <p class="slide-description" data-position="-00,-60">⬤And the impact on society Neoprene and Polyisoprene has and which is better including justification on why</p>
+                        <p class="eyebrow">01 / Introduction</p>
+
+                        <h2 class="slide-title">What are we looking at?</h2>
+
+                        <p class="slide-description">
+                            Both materials are types of rubber, but they aren't made
+                            the same way. We'll compare what makes each one useful
+                            and where each one has its disadvantages.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Material properties</h3>
+                                <p>
+                                    How strong, flexible, durable, and water-resistant
+                                    are they?
+                                </p>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Manufacturing</h3>
+                                <p>
+                                    How are they produced, and what raw materials
+                                    are needed?
+                                </p>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Uses and impact</h3>
+                                <p>
+                                    Where do we encounter these materials, and how
+                                    do they affect society and the environment?
+                                </p>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Final comparison</h3>
+                                <p>
+                                    Which one is more beneficial overall, and
+                                    what makes it the better choice?
+                                </p>
+                            </article>
+                        </div>
                     </div>
-                </div>
-                <div class="slide" data-bg="linear-gradient(135deg, #fef08a, #f97316)" data-position="0,0" data-text-color="#1e293b">
+                </section>
+
+                <!-- SLIDE 3: WHAT ARE THEY -->
+                <section class="slide" data-bg="#fef08a" data-text-color="#1e293b">
                     <div class="slide-content">
-                        <h2 class="slide-title">Characteristics And Uses</h2>
+                        <p class="eyebrow">02 / The Basics</p>
+
+                        <h2 class="slide-title">First, what are these materials?</h2>
+
+                        <p class="slide-description">
+                            The biggest difference is where they come from:
+                            natural rubber comes from plants, while neoprene
+                            is manufactured through chemical processes.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Natural rubber</h3>
+
+                                <p>
+                                    Natural rubber is mainly made of a polymer
+                                    called <strong>cis-1,4-polyisoprene</strong>.
+                                </p>
+
+                                <p>
+                                    It comes from latex collected from rubber
+                                    trees, which is then processed into usable rubber.
+                                </p>
+
+                                <div class="image-placeholder title-images">
+                                    <img src="./img/natree.webp" alt="Natural rubber">
+                                </div>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Neoprene</h3>
+
+                                <p>
+                                    Neoprene is a synthetic rubber also known as
+                                    <strong>polychloroprene</strong>.
+                                </p>
+
+                                <p>
+                                    It is made by chemically joining many
+                                    chloroprene molecules into long polymer chains.
+                                </p>
+
+                                <div class="image-placeholder title-images">
+                                    <img src="./img/synthrub.webp" alt="Synthetic neoprene">
+                                </div>
+                            </article>
+                        </div>
+
+                        <p class="small-note">
+                            A small distinction: polyisoprene can also be manufactured
+                            synthetically. Here, we're comparing neoprene with
+                            naturally sourced polyisoprene.
+                        </p>
                     </div>
-                </div>
-                    <div class="slide" data-bg="salmon" data-position="0,0" data-text-color="#1e293b">
+                </section>
+
+                <!-- SLIDE 4: NATURAL RUBBER -->
+                <section class="slide" data-bg="#d1fae5" data-text-color="#12352c">
                     <div class="slide-content">
+                        <p class="eyebrow">03 / Material Properties</p>
+
+                        <h2 class="slide-title">Natural Rubber</h2>
+
+                        <p class="slide-description">
+                            Natural rubber is especially good at stretching and
+                            returning to its original shape. That's one reason
+                            it's used in so many everyday products.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Strength and flexibility</h3>
+
+                                <ul>
+                                    <li>Very elastic and capable of stretching significantly.</li>
+                                    <li>Has high tensile strength when properly processed.</li>
+                                    <li>Can return close to its original shape after being stretched.</li>
+                                    <li>Works well when repeated bending and movement are required.</li>
+                                </ul>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Durability and water resistance</h3>
+
+                                <ul>
+                                    <li>Has good resistance to wear and repeated bending.</li>
+                                    <li>Resists water well.</li>
+                                    <li>Can deteriorate faster when exposed to ozone, sunlight, oils, and weathering.</li>
+                                    <li>Its performance depends on how it is processed and formulated.</li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <div class="image-placeholder title-images">
+                            <img src="./img/natdiag.webp" alt="Natural rubber diagram">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SLIDE 5: NEOPRENE -->
+                <section class="slide" data-bg="#dbeafe" data-text-color="#172b4d">
+                    <div class="slide-content">
+                        <p class="eyebrow">04 / Material Properties</p>
+
                         <h2 class="slide-title">Neoprene</h2>
+
+                        <p class="slide-description">
+                            Neoprene is useful when rubber needs to handle tougher
+                            conditions. It gives up some of natural rubber's
+                            standout elasticity in exchange for other advantages.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Strength and flexibility</h3>
+
+                                <ul>
+                                    <li>Flexible and resilient.</li>
+                                    <li>Has good resistance to abrasion.</li>
+                                    <li>Can handle repeated use in many applications.</li>
+                                    <li>Can be manufactured in different thicknesses and forms.</li>
+                                </ul>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Durability and water resistance</h3>
+
+                                <ul>
+                                    <li>Has good resistance to weathering and ozone.</li>
+                                    <li>Handles oils better than natural rubber.</li>
+                                    <li>Closed-cell foam versions help reduce water absorption.</li>
+                                    <li>Foam neoprene is also useful for insulation.</li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <div class="image-placeholder title-images">
+                            <img src="./img/synth.jpg" alt="Neoprene gasket">
+                        </div>
+
+                        <p class="small-note">
+                            Neoprene's exact properties depend on its formulation
+                            and whether it is solid rubber or foam.
+                        </p>
                     </div>
-                </div>
-                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                </section>
+
+                <!-- SLIDE 6: USES -->
+                <section class="slide" data-bg="#fce7f3" data-text-color="#45152f">
                     <div class="slide-content">
-                        <h2 class="slide-title" data-position="-250,150">Characteristics of Neoprene</h2>
+                        <p class="eyebrow">05 / Everyday Applications</p>
+
+                        <h2 class="slide-title">Where are they used?</h2>
+
+                        <p class="slide-description">
+                            Their different properties make them useful for
+                            different jobs. One is especially good at elasticity,
+                            while the other is useful in harsher environments.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Natural rubber</h3>
+
+                                <ul>
+                                    <li>Vehicle tires and tire components.</li>
+                                    <li>Elastic bands.</li>
+                                    <li>Gloves and footwear.</li>
+                                    <li>Vibration-damping components.</li>
+                                    <li>Some medical and industrial products.</li>
+                                </ul>
+
+                                <div class="image-placeholder title-images">
+                                    <img src="./img/natrub.webp" alt="Natural rubber products">
+                                </div>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Neoprene</h3>
+
+                                <ul>
+                                    <li>Wetsuits and protective clothing.</li>
+                                    <li>Industrial hoses and belts.</li>
+                                    <li>Gaskets and seals.</li>
+                                    <li>Electrical cable coverings.</li>
+                                    <li>Adhesives and protective padding.</li>
+                                </ul>
+
+                                <div class="image-placeholder title-images">
+                                    <img src="./img/synthrub.webp" alt="Synthetic neoprene">
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                </div>
-                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                </section>
+
+                <!-- SLIDE 7: NATURAL RUBBER PRODUCTION -->
+                <section class="slide" data-bg="#dcfce7" data-text-color="#173b28">
                     <div class="slide-content">
-                        <h2 class="slide-title" data-position="-250,150">Uses of Neoprene</h2>
+                        <p class="eyebrow">06 / Manufacturing</p>
+
+                        <h2 class="slide-title">How is natural rubber made?</h2>
+
+                        <p class="slide-description">
+                            Natural rubber starts as latex, a milky liquid collected
+                            from rubber trees. It goes through several steps before
+                            becoming the rubber used in products.
+                        </p>
+
+                        <div class="process">
+                            <div class="process-step">
+                                <strong>1. Tapping</strong>
+                                <p>
+                                    Small cuts are made in the tree bark so latex
+                                    can flow out.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>2. Collection</strong>
+                                <p>
+                                    The latex is collected in containers.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>3. Coagulation</strong>
+                                <p>
+                                    The latex is processed so the rubber separates
+                                    into a solid mass.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>4. Processing</strong>
+                                <p>
+                                    The rubber is washed, rolled, and dried.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>5. Manufacturing</strong>
+                                <p>
+                                    Ingredients are mixed in and the rubber is
+                                    shaped into products.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="image-placeholder title-images">
+                            <img src="./img/natree.webp" alt="Natural rubber tree">
+                        </div>
                     </div>
-                </div>
-                    <div class="slide" data-bg="grey" data-position="0,0" data-text-color="white">
+                </section>
+
+                <!-- SLIDE 8: NEOPRENE PRODUCTION -->
+                <section class="slide" data-bg="#e0e7ff" data-text-color="#20245a">
                     <div class="slide-content">
-                        <h2 class="slide-title" data-position="-250,150">What Its composed by</h2>
+                        <p class="eyebrow">07 / Manufacturing</p>
+
+                        <h2 class="slide-title">How is neoprene made?</h2>
+
+                        <p class="slide-description">
+                            Neoprene doesn't come directly from a plant. It is
+                            manufactured by producing chloroprene and joining
+                            its molecules together through polymerization.
+                        </p>
+
+                        <div class="process">
+                            <div class="process-step">
+                                <strong>1. Feedstocks</strong>
+                                <p>
+                                    Butadiene and chlorine are used to produce
+                                    chloroprene.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>2. Chloroprene</strong>
+                                <p>
+                                    Chemical processing creates the chloroprene
+                                    monomer.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>3. Polymerization</strong>
+                                <p>
+                                    Many monomers join into long polychloroprene
+                                    chains.
+                                </p>
+                            </div>
+
+                            <span class="process-arrow">→</span>
+
+                            <div class="process-step">
+                                <strong>4. Finishing</strong>
+                                <p>
+                                    The polymer is processed into materials
+                                    for different products.
+                                </p>
+                            </div>
+                        </div>
+
+                        <article class="content-card">
+                            <h3>What resources are needed?</h3>
+
+                            <ul>
+                                <li>
+                                    <strong>Petroleum or natural gas:</strong>
+                                    Common sources of the hydrocarbon feedstock
+                                    used to make butadiene.
+                                </li>
+                                <li>
+                                    <strong>Salt:</strong>
+                                    A source of chlorine, commonly obtained
+                                    from salt brine.
+                                </li>
+                                <li>
+                                    <strong>Water:</strong>
+                                    Used in industrial processing, including
+                                    emulsion polymerization.
+                                </li>
+                            </ul>
+                        </article>
+
+                        <p class="small-note">
+                            Even though neoprene is synthetic, its production
+                            still depends on resources taken from the environment.
+                        </p>
                     </div>
-                </div>
-                  <div class="slide" data-bg="#FFF9D0" data-position="0,0" data-text-color="black">
+                </section>
+
+                <!-- SLIDE 9: POSITIVE IMPACT -->
+                <section class="slide" data-bg="#fef3c7" data-text-color="#49320c">
                     <div class="slide-content">
-                        <h2 class="slide-title">Polyisoprene</h2>
+                        <p class="eyebrow">08 / Social Impact</p>
+
+                        <h2 class="slide-title">How do they benefit society?</h2>
+
+                        <p class="slide-description">
+                            Both materials make useful products possible, but
+                            they contribute to society in different ways.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Natural rubber</h3>
+
+                                <ul>
+                                    <li>Provides income and jobs for rubber-growing communities.</li>
+                                    <li>Supports transportation through tire production.</li>
+                                    <li>Can come from a renewable resource when trees are responsibly managed.</li>
+                                    <li>Can biodegrade more readily than many synthetic polymers under suitable conditions.</li>
+                                </ul>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Neoprene</h3>
+
+                                <ul>
+                                    <li>Provides durable materials for industrial equipment.</li>
+                                    <li>Helps protect people through wetsuits and other protective products.</li>
+                                    <li>Resists weathering and many oils.</li>
+                                    <li>Provides useful insulation and sealing materials.</li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <div class="image-placeholder title-images">
+                            <img src="./img/synth.jpg" alt="Neoprene gasket">
+                        </div>
                     </div>
-                </div>
+                </section>
+
+                <!-- SLIDE 10: NEGATIVE IMPACT -->
+                <section class="slide" data-bg="#fee2e2" data-text-color="#4c1717">
+                    <div class="slide-content">
+                        <p class="eyebrow">09 / Environmental Impact</p>
+
+                        <h2 class="slide-title">What are the downsides?</h2>
+
+                        <p class="slide-description">
+                            Neither material is completely harmless to the
+                            environment. Their impacts depend on how they're
+                            produced, used, and disposed of.
+                        </p>
+
+                        <div class="content-grid">
+                            <article class="content-card">
+                                <h3>Natural rubber</h3>
+
+                                <ul>
+                                    <li>Large plantations can contribute to deforestation and habitat loss.</li>
+                                    <li>Monoculture plantations can reduce biodiversity.</li>
+                                    <li>Farming and processing can involve chemicals and create pollution.</li>
+                                    <li>Natural latex proteins can cause allergic reactions in some people.</li>
+                                </ul>
+                            </article>
+
+                            <article class="content-card">
+                                <h3>Neoprene</h3>
+
+                                <ul>
+                                    <li>Its production relies heavily on fossil-based feedstocks.</li>
+                                    <li>Manufacturing requires energy and industrial chemicals.</li>
+                                    <li>Some production stages can create hazardous emissions if poorly controlled.</li>
+                                    <li>Recycling and disposal can be difficult because it is a durable synthetic polymer.</li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <p class="small-note">
+                            Responsible sourcing, cleaner manufacturing, and better
+                            waste management can help reduce the impact of both materials.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SLIDE 11: COMPARISON -->
+                <section class="slide" data-bg="#1e293b" data-text-color="#ffffff">
+                    <div class="slide-content">
+                        <p class="eyebrow">10 / Side-by-Side Comparison</p>
+
+                        <h2 class="slide-title">Natural Rubber vs. Neoprene</h2>
+
+                        <p class="slide-description">
+                            Here's a quick look at where each material performs best.
+                        </p>
+
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Natural Rubber</th>
+                                    <th>Neoprene</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Elasticity</td>
+                                    <td>Excellent</td>
+                                    <td>Good</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Tensile strength</td>
+                                    <td>Very high</td>
+                                    <td>Good to high</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Water resistance</td>
+                                    <td>Good</td>
+                                    <td>Good</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Oil resistance</td>
+                                    <td>Limited</td>
+                                    <td>Very good</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Weather and ozone resistance</td>
+                                    <td>Lower</td>
+                                    <td>Very good</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Renewable feedstock</td>
+                                    <td>Yes, when responsibly grown</td>
+                                    <td>Generally no</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Main advantage</td>
+                                    <td>Elasticity and resilience</td>
+                                    <td>Oil and weather resistance</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="small-note">
+                            These are general comparisons. Actual performance
+                            depends on the specific rubber formulation and product.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SLIDE 12: GRAPH -->
+                <section class="slide" data-bg="#f8fafc" data-text-color="#172033">
+                    <div class="slide-content">
+                        <p class="eyebrow">11 / Visual Comparison</p>
+
+                        <h2 class="slide-title">Comparing Their Properties</h2>
+
+                        <p class="slide-description">
+                            These ratings give a general idea of how the two
+                            materials compare. A higher score means better
+                            performance in that category.
+                        </p>
+
+                        <div class="chart">
+                            <div class="chart-row">
+                                <span class="chart-label">Elasticity</span>
+
+                                <div class="chart-bars">
+                                    <div class="bar natural" style="width: 100%"></div>
+                                    <div class="bar neoprene" style="width: 80%"></div>
+                                </div>
+                            </div>
+
+                            <div class="chart-row">
+                                <span class="chart-label">Strength</span>
+
+                                <div class="chart-bars">
+                                    <div class="bar natural" style="width: 100%"></div>
+                                    <div class="bar neoprene" style="width: 80%"></div>
+                                </div>
+                            </div>
+
+                            <div class="chart-row">
+                                <span class="chart-label">Water resistance</span>
+
+                                <div class="chart-bars">
+                                    <div class="bar natural" style="width: 80%"></div>
+                                    <div class="bar neoprene" style="width: 80%"></div>
+                                </div>
+                            </div>
+
+                            <div class="chart-row">
+                                <span class="chart-label">Oil resistance</span>
+
+                                <div class="chart-bars">
+                                    <div class="bar natural" style="width: 20%"></div>
+                                    <div class="bar neoprene" style="width: 80%"></div>
+                                </div>
+                            </div>
+
+                            <div class="chart-row">
+                                <span class="chart-label">Weather resistance</span>
+
+                                <div class="chart-bars">
+                                    <div class="bar natural" style="width: 40%"></div>
+                                    <div class="bar neoprene" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #16a085"></span>
+                                Natural rubber
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #716fee"></span>
+                                Neoprene
+                            </div>
+                        </div>
+
+                        <p class="small-note">
+                            These are illustrative qualitative ratings, not
+                            laboratory measurements. Real performance varies
+                            depending on the formulation.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SLIDE 13: CONCLUSION -->
+                <section class="slide" data-bg="#716fee" data-text-color="#ffffff">
+                    <div class="slide-content">
+                        <p class="eyebrow">12 / Final Verdict</p>
+
+                        <h2 class="slide-title">So, which one is better?</h2>
+
+                        <p class="slide-description">
+                            My overall choice would be natural rubber, as long
+                            as it is responsibly sourced.
+                        </p>
+
+                        <div class="verdict">
+                            Natural rubber comes from a renewable resource and
+                            has excellent elasticity and strength, making it
+                            useful in a wide range of products.
+
+                            <br><br>
+
+                            However, neoprene is better when a product needs
+                            stronger resistance to oils, ozone, and weathering.
+                            It has advantages that natural rubber cannot match
+                            as easily.
+
+                            <br><br>
+
+                            There isn't one material that wins in every situation.
+                            The better choice depends on what the product needs
+                            to do and how responsibly the material is produced.
+                        </div>
+
+                        <p class="slide-description">
+                            My conclusion: natural rubber is more beneficial
+                            overall, but neoprene is the better choice for
+                            certain demanding applications.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SLIDE 14: SOURCES -->
+                <section class="slide" data-bg="#111827" data-text-color="#ffffff">
+                    <div class="slide-content">
+                        <p class="eyebrow">13 / References</p>
+
+                        <h2 class="slide-title">Sources and Further Reading</h2>
+
+                        <p class="slide-description">
+                            These sources helped me understand the chemistry,
+                            production, uses, and environmental effects of
+                            natural rubber and neoprene.
+                        </p>
+
+                        <div class="source-list">
+                            <div>
+                                <strong>OpenStax: Organic Chemistry</strong>
+
+                                <p>
+                                    Explains natural rubber and synthetic
+                                    rubber chemistry.
+                                </p>
+
+                                <a href="https://openstax.org/books/organic-chemistry/pages/14-6-diene-polymers-natural-and-synthetic-rubbers"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Read the OpenStax chapter
+                                </a>
+                            </div>
+
+                            <div>
+                                <strong>CDC / NIOSH</strong>
+
+                                <p>
+                                    Information about chloroprene, neoprene
+                                    production, properties, and uses.
+                                </p>
+
+                                <a href="https://stacks.cdc.gov/view/cdc/209840"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Read the NIOSH document
+                                </a>
+                            </div>
+
+                            <div>
+                                <strong>National Toxicology Program</strong>
+
+                                <p>
+                                    Background information about chloroprene
+                                    and its industrial uses.
+                                </p>
+
+                                <a href="https://www.ncbi.nlm.nih.gov/books/NBK498760/"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Read the background document
+                                </a>
+                            </div>
+
+                            <div>
+                                <strong>U.S. Environmental Protection Agency</strong>
+
+                                <p>
+                                    Information about polychloroprene
+                                    manufacturing and industrial emissions.
+                                </p>
+
+                                <a href="https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000WNHZ.TXT"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    Read the EPA report
+                                </a>
+                            </div>
+                        </div>
+
+                        <p class="small-note">
+                            Thank you for listening!(AI was used for formatting thats why this was done quickly instead of me fighting over javascript saying error on line 55 when its actually on line 4)
+                        </p>
+                    </div>
+                </section>
+
             </div>
 
-            <!-- Navigation Controls -->
-            <button class="nav-btn prev-btn" id="prevBtn" aria-label="Previous">
-                <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+            <!-- NAVIGATION BUTTONS -->
+            <button class="nav-btn prev-btn"
+                    id="prevBtn"
+                    type="button"
+                    aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 19l-7-7 7-7"></path>
+                </svg>
             </button>
-            <button class="nav-btn next-btn" id="nextBtn" aria-label="Next">
-                <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+
+            <button class="nav-btn next-btn"
+                    id="nextBtn"
+                    type="button"
+                    aria-label="Next slide">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 5l7 7-7 7"></path>
+                </svg>
             </button>
         </div>
-        
-        <!-- Pagination System Elements -->
-        <div class="pagination-container" id="paginationContainer"></div>
-    </div>
-    <script>const AUTOPLAY_INTERVAL = 2147483647; // ms v x 10^3 = s
-const track = document.getElementById('slidesTrack');
-const container = document.getElementById('slideshowContainer');
-const pagination = document.getElementById('paginationContainer');
-const slides = track.querySelectorAll('.slide');
-let currentIndex = 0, autoplayTimer = null;
 
-function updateSlide() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    pagination.querySelectorAll('.dot').forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
-}
+        <!-- PAGINATION -->
+        <div class="pagination-container"
+             id="paginationContainer"
+             aria-label="Slide navigation"></div>
+    </main>
 
-function move(dir) {
-    currentIndex = (currentIndex + dir + slides.length) % slides.length;
-    updateSlide();
-    resetAutoplay();
-}
-
-function start() {
-    if (!autoplayTimer && slides.length > 1) {
-        autoplayTimer = setInterval(() => move(1), AUTOPLAY_INTERVAL);
-    }
-}
-
-function stop() {
-    if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-    }
-}
-
-function resetAutoplay() {
-    stop();
-    start();
-}
-
-// Fallback keywords for legacy API
-const KEYWORD_POSITION_MAP = {
-    'top-left':      { left: '0%',    top: '0%',    translate: '0%, 0%' },
-    'top-center':    { left: '50%',   top: '0%',    translate: '-50%, 0%' },
-    'top-right':     { left: '100%',  top: '0%',    translate: '-100%, 0%' },
-    'center-left':   { left: '0%',    top: '50%',   translate: '0%, -50%' },
-    'center':        { left: '50%',   top: '50%',   translate: '-50%, -50%' },
-    'center-right':  { left: '100%',  top: '50%',   translate: '-100%, -50%' },
-    'bottom-left':   { left: '0%',    top: '100%',  translate: '0%, -100%' },
-    'bottom-center': { left: '50%',   top: '100%',  translate: '-50%, -100%' },
-    'bottom-right':  { left: '100%',  top: '100%',  translate: '-100%, -100%' }
-};
-
-function applyElementStyles(element) {
-    const bg = element.getAttribute('data-bg') || '';
-    if (bg) {
-        if (bg.startsWith('http') || bg.includes('/') || bg.includes('.')) {
-            element.style.backgroundImage = `url('${bg}')`;
-        } else {
-            element.style.background = bg;
-        }
-    }
-
-    const textColor = element.getAttribute('data-text-color');
-    if (textColor) element.style.color = textColor;
-
-    const size = element.getAttribute('data-size');
-    if (size) element.style.fontSize = size.match(/^\d+$/) ? `${size}px` : size;
-}
-
-function applyPositioning(element, positionAttr) {
-    if (!positionAttr) return;
-    
-    element.style.position = 'absolute';
-    
-    if (positionAttr.includes(',')) {
-        const [xSegment, ySegment] = positionAttr.split(',');
-        const xRaw = xSegment.trim();
-        const yRaw = ySegment.trim();
-
-        const leftValue = xRaw.match(/[a-zA-Z%]/) ? xRaw : `calc(50% + ${xRaw}px)`;
-        const topValue = yRaw.match(/[a-zA-Z%]/) ? yRaw : `calc(50% - ${yRaw}px)`; 
-
-        element.style.left = leftValue;
-        element.style.top = topValue;
-        element.style.transform = 'translate(-50%, -50%)'; 
-    } 
-    else if (KEYWORD_POSITION_MAP[positionAttr]) {
-        const config = KEYWORD_POSITION_MAP[positionAttr];
-        element.style.left = config.left;
-        element.style.top = config.top;
-        element.style.transform = `translate(${config.translate})`;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (slides.length === 0) return;
-
-    slides.forEach((slide, i) => {
-        applyElementStyles(slide);
-
-        const slideContentWrapper = slide.querySelector('.slide-content');
-        const slidePosition = slide.getAttribute('data-position');
-        
-        // Fix: Explicitly remove padding limits if custom container positioning is targeted
-        if (slideContentWrapper) {
-            slideContentWrapper.style.position = 'absolute';
-            if (slidePosition) {
-                slideContentWrapper.style.width = 'max-content';
-                slideContentWrapper.style.maxWidth = '600px';
-                applyPositioning(slideContentWrapper, slidePosition);
-            } else {
-                // If the slide frame has no positioning, treat the canvas area as a full stage container
-                slideContentWrapper.style.inset = '0';
-                slideContentWrapper.style.width = '100%';
-                slideContentWrapper.style.maxWidth = '100%';
-            }
-        }
-
-        // Deep child elements selector loop
-        const styledChildren = slide.querySelectorAll('.slide-content, [data-position], [data-bg], [data-text-color], [data-size]');
-        styledChildren.forEach(child => {
-            applyElementStyles(child);
-            // Apply positioning modifications safely only to explicit sub-items
-            if (child !== slide && child !== slideContentWrapper) {
-                applyPositioning(child, child.getAttribute('data-position'));
-            }
-        });
-
-        const dot = document.createElement('span');
-        dot.className = `dot${i === 0 ? ' active' : ''}`;
-        dot.onclick = () => {
-            currentIndex = i;
-            updateSlide();
-            resetAutoplay();
-        };
-        pagination.appendChild(dot);
-    });
-
-    document.getElementById('prevBtn').onclick = () => move(-1);
-    document.getElementById('nextBtn').onclick = () => move(1);
-    window.onkeydown = (e) => {
-        if (e.key === "ArrowLeft") move(-1);
-        if (e.key === "ArrowRight") move(1);
-    };
-    container.onmouseenter = stop;
-    container.onmouseleave = start;
-    start();
-});
-</script>
+    <script src="./index.js"></script>
 </body>
 </html>
